@@ -26,12 +26,18 @@ class VotingController extends Controller
      */
     
 
-    public function students($course=null)
+    public function students($municipality=null)
     {
-        if($course != null) {
-            $raw = Student::where('course', $course)->get();
+        if($municipality != null) {
+            $raw = Student::where('municipality', $municipality)->get();
         } else {
             $raw = Student::all();
+        }
+
+        $rawVotes = Vote::all();
+        $votes = [];
+        foreach ($rawVotes as $vote) {
+            $votes[$vote->student_id]=true;
         }
         
         $students = [];
@@ -43,15 +49,21 @@ class VotingController extends Controller
         foreach ($raw as $student) {
             $students[] = $student;
             
-            @$utilities['municipalities'][$student->municipality]++;
-            @$utilities['barangays'][$student->barangay]++;
-            @$utilities['provinces'][$student->province]++;
-            @$utilities['courses'][$student->course]++;
+            @$utilities['municipalities'][$student->municipality]['total']++;
+            @$utilities['barangays'][$student->barangay]['total']++;
+            @$utilities['provinces'][$student->province]['total']++;
+            @$utilities['courses'][$student->course]['total']++;
+
+            if(isset($votes[$student->id])) {
+                @$utilities['courses'][$student->course]['voted']++;
+                @$utilities['municipalities'][$student->municipality]['voted']++;
+            }
         }
         //dd($utilities['courses']);
         return view('voting/students',[
             'students'=>$students,        
             'utilities'=>$utilities,        
+            'votes'=>$votes,        
         ]);
     }
 

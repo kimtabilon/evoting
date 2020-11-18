@@ -27,7 +27,7 @@ Auth::routes();
 Route::get('/home', 'App\Http\Controllers\HomeController@index')->name('home')->middleware('auth');
 
 Route::group(['middleware' => 'auth'], function () {
-		Route::get('students/{course?}', ['as' => 'students', 'uses' => 'App\Http\Controllers\VotingController@students']);
+		Route::get('students/{municipality?}', ['as' => 'students', 'uses' => 'App\Http\Controllers\VotingController@students']);
 		Route::post('students/new', ['as' => 'students.new', 'uses' => 'App\Http\Controllers\VotingController@newStudent']);
 		Route::get('students/delete/{id}', ['as' => 'students.delete', 'uses' => 'App\Http\Controllers\VotingController@deleteStudent']);
 

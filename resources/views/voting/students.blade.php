@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="row">
-  <div class="col-md-9">
+  <div class="col-md-6">
     <div class="card ">
       <div class="card-header">
         <h4 class="card-title"> Students Table
@@ -31,13 +31,18 @@
                 <th>Barangay</th>
                 <th>Municipality</th>
                 <th>Province</th>
+                <th>Voted</th>
                 <th>BTNS</th>
               </tr>
             </thead>
             <tbody>
               @foreach($students as $student)
                 <tr>
+                  @if(isset($votes[$student->id]))
+                  <td><span style="color:green;">{{$student->id_number}}</span></td>
+                  @else
                   <td>{{$student->id_number}}</td>
+                  @endif
                   <td>{{$student->firstname}}</td>
                   <td>{{$student->middlename}}</td>
                   <td>{{$student->lastname}}</td>
@@ -46,6 +51,7 @@
                   <td>{{$student->barangay}}</td>
                   <td>{{$student->municipality}}</td>
                   <td>{{$student->province}}</td>
+                  <td>{{isset($votes[$student->id])?'Yes':'No'}}</td>
                   <td>
                     <button 
                       data-toggle="modal" 
@@ -90,13 +96,47 @@
               <tr>
                 <th>Name</th>
                 <th># of Students</th>
+                <th>Voted</th>
               </tr>
             </thead>
             <tbody>
               @foreach($utilities['courses'] as $_course => $_count)
               <tr>
-                <td><a href="{{ route('students', $_course)}}" style="color: #eee;">{{$_course}}</a></td>
-                <td>{{$_count}}</td>
+                <td>{{$_course}}</td>
+                <td>{{$_count['total']}}</td>
+                <td>{{isset($_count['voted'])?$_count['voted']:0}}</td>
+                <td>
+              </tr>
+              @endforeach
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-3">
+    <div class="card  card-plain">
+      <div class="card-header">
+        <h4 class="card-title"> Municipalities</h4>
+        <p class="category"> Here is a subtitle for this table</p>
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table tablesorter " id="">
+            <thead class=" text-primary">
+              <tr>
+                <th>Name</th>
+                <th># of Students</th>
+                <th>Voted</th>
+              </tr>
+            </thead>
+            <tbody>
+              @foreach($utilities['municipalities'] as $mun => $_count)
+              <tr>
+                <td><a href="{{ route('students', $mun)}}" style="color: #eee;">{{$mun}}</a></td>
+                <td>{{$_count['total']}}</td>
+                <td>{{isset($_count['voted'])?$_count['voted']:0}}</td>
                 <td>
               </tr>
               @endforeach

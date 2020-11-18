@@ -24,10 +24,10 @@ class FrontController extends Controller
 	     		return redirect()->route('front')->with(['title'=>'Opps', 'msg'=>'already voted', 'type'=>'warning']);
 	     } else {
 	     		if(count($r)==3) {
-			     		/*$model = new Vote;
+			     		$model = new Vote;
 			     		$model->student_id = $r['student_id'];
 			     		$model->candidate_id = 0;
-			     		$model->save();*/
+			     		$model->save();
 			     } else {
 			     		foreach ($r as $key => $value) {
 			     			switch ($key) {
@@ -37,10 +37,10 @@ class FrontController extends Controller
 			     					break;
 			     				
 			     				default:
-			     					/*$model = new Vote;
+			     					$model = new Vote;
 						     		$model->student_id = $r['student_id'];
 						     		$model->candidate_id = $value;
-						     		$model->save();*/
+						     		$model->save();
 
 						     		$candidates[] = Candidate::find($value);
 			     					break;
@@ -52,7 +52,6 @@ class FrontController extends Controller
 	     		'candidates'=>$candidates,
 	     		'id'=>$r['student_id'],
 	     ]);
-	     //return redirect()->route('front')->with(['title'=>'Yes', 'msg'=>'Successfuly Voted!', 'type'=>'success']);
 	 }
 
 	 public function sheet(Request $request) {
