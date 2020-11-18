@@ -36,6 +36,7 @@ Route::group(['middleware' => 'auth'], function () {
 		Route::get('candidates/delete/{id}', ['as' => 'candidates.delete', 'uses' => 'App\Http\Controllers\VotingController@deleteCandidate']);
 
 		Route::get('votes', ['as' => 'votes', 'uses' => 'App\Http\Controllers\VotingController@votes']);
+		Route::get('reset', ['as' => 'reset', 'uses' => 'App\Http\Controllers\VotingController@reset']);
 		Route::post('import', ['as' => 'import', 'uses' => 'App\Http\Controllers\VotingController@import']);
 
 		Route::get('rules', ['as' => 'rules', 'uses' => 'App\Http\Controllers\VotingController@rules']);

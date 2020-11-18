@@ -129,6 +129,11 @@ class VotingController extends Controller
         return redirect()->route('students');
     }
 
+    public function reset() {
+        Vote::truncate();
+        return redirect()->route('votes');
+    }
+
     /*VOTES*/
     public function votes()
     {
