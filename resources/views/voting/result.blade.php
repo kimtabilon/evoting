@@ -17,7 +17,7 @@
                   <br>
                   {{$candidate['party']}}<br>
                   {{$candidate['course']}}<br>
-                  <span class="badge badge-pill badge-primary" style="font-size: 15pt; padding: 5px 20px;"> Votes : {{$candidate['votes']}}</span>
+                  <span class="badge badge-pill badge-warning" style="font-size: 15pt; padding: 5px 20px;"> Votes : {{$candidate['votes']}}</span>
 
               </div>
             @endforeach 
