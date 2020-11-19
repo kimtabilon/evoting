@@ -1,7 +1,9 @@
 <div style="text-align: center">
 	<hr>
 	<h3>SSC ELECTRONIC VOTING</h3>
-	<em>Voting ID : </em><strong>00{{$id}}</strong>
+	<em>Voting ID : </em><strong>00{{$student->id}}</strong><br>
+	{{$student->id_number}} &bull; {{$student->firstname}} {{$student->lastname}} <br>
+	{{date('F j, Y, g:i a')}}
 	<hr>
 	<h4>VOTED CANDIDATES</h4>
 	@foreach($candidates as $candidate) 

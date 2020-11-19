@@ -59,8 +59,12 @@
                             <a href="{{ route('profile.edit') }}" class="nav-item dropdown-item">{{ __('Profile') }}</a>
                         </li>
                         <li class="nav-link">
+                            <a href="#" class="nav-item dropdown-item print-btn">{{ __('Print Page') }}</a>
+                        </li>
+                        <li class="nav-link">
                             <a href="#" class="nav-item dropdown-item">{{ __('Settings') }}</a>
                         </li>
+                        
                         <li class="nav-link">
                             <a href="{{route('reset')}}" class="nav-item dropdown-item">{{ __('Reset Votes') }}</a>
                         </li>

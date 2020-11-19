@@ -26,6 +26,30 @@
 </div>
 @endforeach  
 </div>  
+
+<div class="print-wrap" style="display: none;">
+<h2>SSC EVOTING RESULTS</h2>
+<em>Printed: {{date('F j, Y, g:i a')}}</em>
+@foreach($positions as $position => $candidates)
+<h4>{{$position}}</h4>
+<table class="table" style="width: 100%; border: 1px solid #333; margin-top: -10px">
+  <thead>
+  <th>Candidate</th>
+  <th>Party</th>
+  <th>Votes</th>
+  </thead>
+  <tbody>
+    @foreach($candidates as $candidate)
+    <tr>
+      <td>{{$candidate['name']}}</td>
+      <td style="text-align: center;">{{$candidate['party']}}</td>
+      <td style="text-align: center;">{{$candidate['votes']}}</td>
+    </tr>
+    @endforeach 
+  </tbody>
+</table>
+@endforeach
+</div>
 @endsection
 
 @push('js')

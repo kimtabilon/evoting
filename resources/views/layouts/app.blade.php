@@ -75,6 +75,16 @@
 
         <script>
             $(document).ready(function() {
+                $('.print-btn').on('click', function(){
+                    var mywindow = window.open('', 'EVOTING PRINTOUT', 'height=400,width=600');
+                    mywindow.document.write('<html><head><title>EVOTING PRINTOUT</title>');
+                    mywindow.document.write('</head><body >');
+                    mywindow.document.write($('.print-wrap').html());
+                    mywindow.document.write('</body></html>');
+
+                    mywindow.print();
+                    //mywindow.close();
+                });
                 $().ready(function() {
                     $sidebar = $('.sidebar');
                     $navbar = $('.navbar');

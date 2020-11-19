@@ -50,7 +50,7 @@ class FrontController extends Controller
 	     }
 	     return view('voting/print', [
 	     		'candidates'=>$candidates,
-	     		'id'=>$r['student_id'],
+	     		'student'=>Student::find($r['student_id']),
 	     ]);
 	 }
 
