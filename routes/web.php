@@ -38,6 +38,8 @@ Route::group(['middleware' => 'auth'], function () {
 		Route::get('votes', ['as' => 'votes', 'uses' => 'App\Http\Controllers\VotingController@votes']);
 		Route::get('reset', ['as' => 'reset', 'uses' => 'App\Http\Controllers\VotingController@reset']);
 		Route::post('import', ['as' => 'import', 'uses' => 'App\Http\Controllers\VotingController@import']);
+		Route::get('task', ['as' => 'task', 'uses' => 'App\Http\Controllers\VotingController@task']);
+		Route::get('printout', ['as' => 'printout', 'uses' => 'App\Http\Controllers\VotingController@printout']);
 
 		Route::get('rules', ['as' => 'rules', 'uses' => 'App\Http\Controllers\VotingController@rules']);
 		Route::post('rules/new', ['as' => 'rules.new', 'uses' => 'App\Http\Controllers\VotingController@newRule']);

@@ -35,6 +35,12 @@
                     <p>{{ __('Votes') }}</p>
                 </a>
             </li>
+            <li @if ($pageSlug == 'task') class="active " @endif>
+                <a href="{{ route('task')  }}">
+                    <i class="tim-icons icon-controller"></i>
+                    <p>{{ __('Task') }}</p>
+                </a>
+            </li>
             <li @if ($pageSlug == 'profile') class="active " @endif>
                 <a href="{{ route('profile.edit')  }}">
                     <i class="tim-icons icon-lock-circle"></i>

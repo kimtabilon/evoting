@@ -5,6 +5,7 @@ use App\Models\Student;
 use App\Models\Candidate;
 use App\Models\Rule;
 use App\Models\Vote;
+use App\Models\Task;
 use Illuminate\Http\Request;
 
 class VotingController extends Controller
@@ -132,6 +133,25 @@ class VotingController extends Controller
     public function reset() {
         Vote::truncate();
         return redirect()->route('votes');
+    }
+
+    public function task() {
+        $tasks = [];
+
+        $tasks['print'] = Task::where('type','print')->where('done', false)->get();
+        return view('voting/task', ['tasks'=>$tasks]);
+    }
+
+    public function printout() {
+        $tasks = [];
+
+        $tasks['print'] = Task::where('type','print')->where('done', false)->get();
+
+        foreach ($tasks['print'] as $task) {
+            $task->done = true;
+            $task->save();
+        }
+        return view('voting/print', ['tasks'=>$tasks]);
     }
 
     /*VOTES*/

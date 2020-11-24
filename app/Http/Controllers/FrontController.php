@@ -6,6 +6,7 @@ use App\Models\Student;
 use App\Models\Candidate;
 use App\Models\Vote;
 use App\Models\Rule;
+use App\Models\Task;
 
 class FrontController extends Controller
 {
@@ -18,7 +19,14 @@ class FrontController extends Controller
 	     $r = $request->all();
 
 	     $votes = Vote::where('student_id', $r['student_id'])->get();
+	     $student = Student::find($r['student_id']);
 	     $candidates = [];
+	     $raw = [];
+
+	     $raw['student']['voting_id'] = '00'.$student->id;
+	     $raw['student']['id_number'] = $student->id_number;
+	     $raw['student']['name'] = $student->firstname.' '.$student->lastname;
+	     $raw['date'] = date('F j, Y, g:i a');
 
 	     if($votes->count()) {
 	     		return redirect()->route('front')->with(['title'=>'Opps', 'msg'=>'already voted', 'type'=>'warning']);
@@ -42,16 +50,28 @@ class FrontController extends Controller
 						     		$model->candidate_id = $value;
 						     		$model->save();
 
-						     		$candidates[] = Candidate::find($value);
+						     		$_candidate = Candidate::find($value);
+						     		$raw['candidates'][] = [
+						     			'name'=>$_candidate->name,
+						     			'position'=>$_candidate->position
+						     		];
 			     					break;
 			     			}
 			     		}
 			     }
 	     }
-	     return view('voting/print', [
+
+	     $task = new Task;
+	     $task->type = 'print';
+	     $task->raw = json_encode($raw);
+	     $task->done = false;
+	     $task->save();
+
+	     /*return view('voting/print', [
 	     		'candidates'=>$candidates,
 	     		'student'=>Student::find($r['student_id']),
-	     ]);
+	     ]);*/
+	     return redirect()->route('front')->with(['title'=>'Yes', 'msg'=>'Successfuly Voted!', 'type'=>'success']);
 	 }
 
 	 public function sheet(Request $request) {

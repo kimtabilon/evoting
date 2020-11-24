@@ -5,14 +5,6 @@
         <div class="container" style="text-align: center;">
 
             <div class="col-md-12">
-                @if(isset($_GET['success']))
-                  <div class="alert alert-success fade show" role="alert">
-                    <strong>Yes, </strong> Successfuly Voted!
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <i class="tim-icons icon-simple-remove"></i>
-                    </button>
-                  </div>
-                @endif
                 @if(Session::get('msg'))
                 <div class="alert alert-{{Session::get('type')}} fade show" role="alert">
                   <strong>{{Session::get('title')}}, </strong> {{Session::get('msg')}}
